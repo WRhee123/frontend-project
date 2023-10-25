@@ -200,6 +200,7 @@ function getMag(magData) {
     console.log(magData)
     let magazineData = magData.data
     magazineData.forEach((magazine) => {
+        console.log(magazine.url)
         let magazineContainer = document.createElement('div');
         magazineContainer.style.height = "40vh"
         magazineContainer.style.width = "40vw"
@@ -218,15 +219,15 @@ function getMag(magData) {
     span.style.border = "2px solid #000"
     magazineContainer.appendChild(span);
     
-    let a = document.createElement("a");
-    a.href = magazine.url;
-    
-    
-    let h2 = document.createElement("h2");
-     h2.textContent = magazine.name;
-    span.appendChild(h2);
 
     
+    let h2 = document.createElement("h2");
+    span.appendChild(h2);
+
+      let a = document.createElement("a");
+    a.setAttribute("href", magazine.url);
+    a.textContent = magazine.name;
+    h2.appendChild(a);
 
     
     
