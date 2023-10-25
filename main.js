@@ -44,7 +44,7 @@ resultContainer.style.flexWrap = 'wrap'
 // resultContainer.style.overflow = "scroll";
 body.appendChild(resultContainer);
 
-    console.log(anime.title)
+    // console.log(anime.title)
     let span = document.createElement("span");
     span.className = "card";
     span.style.height = "40vh"
@@ -96,7 +96,7 @@ $("p").hide()
 
 let img = document.createElement("img");
 img.src = anime.images.jpg.image_url;
-console.log(anime.images.jpg)
+// console.log(anime.images.jpg)
 span.appendChild(img)
 
 
@@ -121,8 +121,6 @@ animeChar.forEach((character) => {
     charContainer.style.width = "40vw"
     charContainer.style.display = 'flex'
     charContainer.style.flexWrap = 'wrap'
-// resultContainer.style.backgroundColor = "black";
-// resultContainer.style.overflow = "scroll";
 body.appendChild(charContainer);
 
 let span = document.createElement("span");
@@ -148,5 +146,91 @@ span.appendChild(img)
 }
 
 
+let mangaButton = document.createElement("button");
+mangaButton.textContent = "Manga";
+body.appendChild(mangaButton);
+
+mangaButton.addEventListener("click", function() {
+    let searchQuery = document.getElementById("searchInput").value
+    $.get("https://api.jikan.moe/v4/manga?q=" + searchQuery, getManga)
+})
+function getManga(mangaData) {
+console.log(mangaData)
+let mangaData2 = mangaData.data;
+mangaData2.forEach((manga) => {
+    let mangaContainer = document.createElement('div');
+    mangaContainer.style.height = "40vh"
+    mangaContainer.style.width = "40vw"
+    mangaContainer.style.display = 'flex'
+    mangaContainer.style.flexWrap = 'wrap'
+body.appendChild(mangaContainer);
+
+let span = document.createElement("span");
+span.className = "card";
+span.style.height = "40vh"
+span.style.width = "40vw";
+span.style.margin = "auto"
+span.style.backgroundColor = "white"
+span.style.display = "inline-block"; 
+span.style.position = "relative"; 
+span.style.border = "2px solid #000"
+mangaContainer.appendChild(span);
+
+let h2 = document.createElement("h2");
+ h2.textContent = manga.title;
+span.appendChild(h2);
+
+let img = document.createElement("img");
+img.src = manga.images.jpg.image_url;
+// console.log(character.images.jpg)
+span.appendChild(img)
+})
+}
+
+let magazineButton = document.createElement("button");
+magazineButton.textContent = "Magazine";
+body.appendChild(magazineButton);
+
+magazineButton.addEventListener("click", function() {
+    let searchQuery = document.getElementById("searchInput").value
+    $.get("https://api.jikan.moe/v4/magazines?q=" + searchQuery, getMag);
+})
+
+function getMag(magData) {
+    console.log(magData)
+    let magazineData = magData.data
+    magazineData.forEach((magazine) => {
+        let magazineContainer = document.createElement('div');
+        magazineContainer.style.height = "40vh"
+        magazineContainer.style.width = "40vw"
+        magazineContainer.style.display = 'flex'
+        magazineContainer.style.flexWrap = 'wrap'
+    body.appendChild(magazineContainer);
+    
+    let span = document.createElement("span");
+    span.className = "card";
+    span.style.height = "40vh"
+    span.style.width = "40vw";
+    span.style.margin = "auto"
+    span.style.backgroundColor = "white"
+    span.style.display = "inline-block"; 
+    span.style.position = "relative"; 
+    span.style.border = "2px solid #000"
+    magazineContainer.appendChild(span);
+    
+    let a = document.createElement("a");
+    a.href = magazine.url;
+    
+    
+    let h2 = document.createElement("h2");
+     h2.textContent = magazine.name;
+    span.appendChild(h2);
+
+    
+
+    
+    
+    })
+}
 });
 
