@@ -11,24 +11,6 @@ body.appendChild(input);
 
 //function that creates a button and adds an eventlistener so when the button is pressed it will send a request to the API with the provided anime name(input)
 //also takes the value of the input and stores it in a variable called searchQuery
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 buttonSearch();
 
 function buttonSearch() {
@@ -46,9 +28,9 @@ body.appendChild(button)}
 
 
 
-function myResults(jikanData) {
+function myResults(showData) {
 // console.log(jikanData);
-let animeData = jikanData.data
+let animeData = showData.data
 console.log(animeData)
 
 animeData.forEach((anime) => {
@@ -69,22 +51,9 @@ body.appendChild(resultContainer);
     span.style.width = "40vw";
     span.style.margin = "auto"
     span.style.backgroundColor = "white"
-    span.style.display = "inline-block"; /* Ensures the span takes up only as much width as necessary */
-    span.style.position = "relative"; /* Establishes a positioning context for absolutely positioned children */
+    span.style.display = "inline-block"; 
+    span.style.position = "relative"; 
     span.style.border = "2px solid #000"
-      
-      
-     
-        // span.img.style. width = 100%; /* Make the image fill the width of the parent span */
-        // span.img.style.height = 100%; /* Make the image fill the height of the parent span */
-        // span.img.style.object-fit = "cover"; /* Maintains aspect ratio while covering the entire span */
-        // span.img.style.position = "absolute"; /* Position the image within the span */
-        // span.img.style.top: 0; /* Position from the top of the span */
-        // span.img.style.left: 0; /* Position from the left of the span */
-      
-
-
-
 resultContainer.appendChild(span);
 
 
@@ -135,6 +104,49 @@ span.appendChild(img)
 
 }
 
+let charButton = document.createElement("button");
+charButton.textContent = "Characters";
+body.appendChild(charButton);
+charButton.addEventListener("click", function() {
+    let searchQuery = document.getElementById("searchInput").value
+    $.get("https://api.jikan.moe/v4/characters?q=" + searchQuery, getChar)
+})
+
+function getChar(charData) {
+console.log(charData)
+let animeChar = charData.data;
+animeChar.forEach((character) => { 
+    let charContainer = document.createElement('div');
+    charContainer.style.height = "40vh"
+    charContainer.style.width = "40vw"
+    charContainer.style.display = 'flex'
+    charContainer.style.flexWrap = 'wrap'
+// resultContainer.style.backgroundColor = "black";
+// resultContainer.style.overflow = "scroll";
+body.appendChild(charContainer);
+
+let span = document.createElement("span");
+span.className = "card";
+span.style.height = "40vh"
+span.style.width = "40vw";
+span.style.margin = "auto"
+span.style.backgroundColor = "white"
+span.style.display = "inline-block"; 
+span.style.position = "relative"; 
+span.style.border = "2px solid #000"
+charContainer.appendChild(span);
+
+let h2 = document.createElement("h2");
+ h2.textContent = character.name;
+span.appendChild(h2);
+
+let img = document.createElement("img");
+img.src = character.images.jpg.image_url;
+// console.log(character.images.jpg)
+span.appendChild(img)
+}) 
+}
 
 
 });
+
