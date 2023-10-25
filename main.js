@@ -5,7 +5,11 @@ body.style.backgroundColor = "dimgray"
 let resultContainer = document.createElement('div');
 resultContainer.style.height = "60vh"
 resultContainer.style.width = "40vw"
+resultContainer.style.display = 'flex'
+resultContainer.style.flexWrap = 'wrap'
 resultContainer.style.backgroundColor = "black";
+resultContainer.style.overflow = "scroll";
+
 
 //this is our input element 
 let input = document.createElement("input");
@@ -18,6 +22,7 @@ body.appendChild(input);
 function buttonSearch() {
 let button = document.createElement("button");
 button.textContent = "search";
+
 // console.log(searchQuery)
 //the searchQuery needs to be within the eventlistener in order for the event to fire and retrieve data that corresponds with the user's input
 button.addEventListener("click", function() {
@@ -29,10 +34,21 @@ let searchQuery = document.getElementById("searchInput").value
 body.appendChild(button)}
 buttonSearch();
 
-function myResults(data) {
-console.log(data);
+function myResults(jikanData) {
+// console.log(jikanData);
+let animeData = jikanData.data
+console.log(animeData)
 
+animeData.forEach((anime) => {
+    console.log(anime.title)
+    let span = document.createElement("span");
+    span.className = "mini-box";
+resultContainer.appendChild(span);
 
+let h2 = document.createElement("h2");
+ 
+span.appendChild(h2);
+})
 
 }
 
