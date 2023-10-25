@@ -2,14 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
 let body = document.getElementsByTagName('body')[0]
 body.style.backgroundColor = "dimgray"
 
-let resultContainer = document.createElement('div');
-resultContainer.style.height = "60vh"
-resultContainer.style.width = "40vw"
-resultContainer.style.display = 'flex'
-resultContainer.style.flexWrap = 'wrap'
-resultContainer.style.backgroundColor = "black";
-resultContainer.style.overflow = "scroll";
-
 
 //this is our input element 
 let input = document.createElement("input");
@@ -31,6 +23,7 @@ let searchQuery = document.getElementById("searchInput").value
 })
 
 
+
 body.appendChild(button)}
 buttonSearch();
 
@@ -40,14 +33,54 @@ let animeData = jikanData.data
 console.log(animeData)
 
 animeData.forEach((anime) => {
+    let resultContainer = document.createElement('div');
+resultContainer.style.height = "60vh"
+resultContainer.style.width = "40vw"
+resultContainer.style.display = 'flex'
+resultContainer.style.flexWrap = 'wrap'
+// resultContainer.style.backgroundColor = "black";
+resultContainer.style.overflow = "scroll";
+body.appendChild(resultContainer);
+
     console.log(anime.title)
     let span = document.createElement("span");
-    span.className = "mini-box";
+    span.className = "card";
+    span.style.height = "40vh"
+    span.style.width = "40vw";
+    span.style.margin = "auto"
+    span.style.backgroundColor = "white"
 resultContainer.appendChild(span);
 
+
 let h2 = document.createElement("h2");
- 
+ h2.textContent = anime.title;
 span.appendChild(h2);
+
+
+
+
+let div = document.createElement("div");
+div.className = "synopsis-box"
+span.appendChild(div);
+
+
+let h4 = document.createElement("h4");
+h4.textContent = "Synopsis";
+div.appendChild(h4)
+
+
+let p = document.createElement("p");
+p.textContent = anime.synopsis;
+// console.log(anime.synopsis)
+div.appendChild(p);
+
+
+let img = document.createElement("img");
+img.src = anime.images.jpg.small;
+console.log(anime.images.jpg)
+span.appendChild(img)
+
+
 })
 
 }
