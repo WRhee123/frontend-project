@@ -1,12 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
 let body = document.getElementsByTagName('body')[0]
-body.style.backgroundColor = "dimgray"
+body.style.backgroundColor = "salmon"
 
+let searchBar = document.createElement("div");
+searchBar.style.height = "20vh"
+searchBar.style.width = "99vw"
+searchBar.style.backgroundColor = "tomato"
+searchBar.textContent = "Animate"
+searchBar.style.textAlign = "center";
+searchBar.style.fontSize = "140px"
+body.appendChild(searchBar);
 
 //this is our input element 
 let input = document.createElement("input");
+input.style.width = "700px"
+input.style.height = "80px"
+input.style.fontSize = "40px"
+input.style.margin = "auto"
+input.style.position = "absolute"
+input.style.left = "50%";
+input.style.top = "50%";
+input.style.transform = "translate(-50%, -50%)";
+input.id = "searchInput";
 input.type = "text"
-input.id = "searchInput"
+input.placeholder = "Enter anime name..."
 body.appendChild(input);
 
 //function that creates a button and adds an eventlistener so when the button is pressed it will send a request to the API with the provided anime name(input)
@@ -15,16 +32,16 @@ buttonSearch();
 
 function buttonSearch() {
 let button = document.createElement("button");
-button.textContent = "search";
+button.textContent = "Shows";
 
 // console.log(searchQuery)
 //the searchQuery needs to be within the eventlistener in order for the event to fire and retrieve data that corresponds with the user's input
-
 button.addEventListener("click", function() {
 let searchQuery = document.getElementById("searchInput").value
     $.get("https://api.jikan.moe/v4/anime?q=" + searchQuery, myResults)
+    $("input").hide()
 })
-body.appendChild(button)}
+searchBar.appendChild(button)}
 
 
 
@@ -45,7 +62,7 @@ resultContainer.style.flexWrap = 'wrap'
 body.appendChild(resultContainer);
 
     // console.log(anime.title)
-    let span = document.createElement("span");
+    let span = document.createElement("div");
     span.className = "card";
     span.style.height = "40vh"
     span.style.width = "40vw";
@@ -64,6 +81,7 @@ span.appendChild(h2);
 span.addEventListener("mouseenter", function() {
     $(p).show();
     $(h4).show()
+     $(a).show()
     $(img).hide();
     $(h2).hide();
 
@@ -71,6 +89,7 @@ span.addEventListener("mouseenter", function() {
 span.addEventListener("mouseleave", function() {
     $(p).hide();
     $(h4).hide();
+
     $(img).show();
     $(h2).show();
 })
@@ -93,11 +112,20 @@ p.textContent = anime.synopsis;
 div.appendChild(p);
 $("p").hide()
 
+let a = document.createElement('a');
+a.textContent = "more info."
+a.href = anime.url
+div.appendChild(a)
+
 
 let img = document.createElement("img");
 img.src = anime.images.jpg.image_url;
+img.style.display = "block";
+img.style.margin = 'auto'
 // console.log(anime.images.jpg)
 span.appendChild(img)
+
+
 
 
 })
@@ -106,10 +134,11 @@ span.appendChild(img)
 
 let charButton = document.createElement("button");
 charButton.textContent = "Characters";
-body.appendChild(charButton);
+searchBar.appendChild(charButton);
 charButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
     $.get("https://api.jikan.moe/v4/characters?q=" + searchQuery, getChar)
+    $("input").hide()
 })
 
 function getChar(charData) {
@@ -148,11 +177,12 @@ span.appendChild(img)
 
 let mangaButton = document.createElement("button");
 mangaButton.textContent = "Manga";
-body.appendChild(mangaButton);
+searchBar.appendChild(mangaButton);
 
 mangaButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
     $.get("https://api.jikan.moe/v4/manga?q=" + searchQuery, getManga)
+    $("input").hide()
 })
 function getManga(mangaData) {
 console.log(mangaData)
@@ -189,11 +219,12 @@ span.appendChild(img)
 
 let magazineButton = document.createElement("button");
 magazineButton.textContent = "Magazine";
-body.appendChild(magazineButton);
+searchBar.appendChild(magazineButton);
 
 magazineButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
     $.get("https://api.jikan.moe/v4/magazines?q=" + searchQuery, getMag);
+    $("input").hide()
 })
 
 function getMag(magData) {
