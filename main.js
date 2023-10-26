@@ -9,12 +9,13 @@ let searchBar = document.createElement("div");
 searchBar.style.height = "20vh"
 searchBar.style.width = "99vw"
 searchBar.style.backgroundColor = "#f95959"
-searchBar.textContent = "Anime"
+searchBar.textContent = "Anime Front End Project"
 searchBar.style.fontFamily = ""
 searchBar.style.color = "#e3e3e3"
 searchBar.style.textAlign = "center";
 searchBar.style.fontSize = "140px"
 body.appendChild(searchBar);
+
 
 //this is our input element 
 let input = document.createElement("input");
@@ -32,6 +33,10 @@ input.type = "text"
 input.placeholder = "Enter anime name..."
 body.appendChild(input);
 
+let buttonContainer = document.createElement("div");
+buttonContainer.style.float = "left"
+searchBar.appendChild(buttonContainer);
+
 //function that creates a button and adds an eventlistener so when the button is pressed it will send a request to the API with the provided anime name(input)
 //also takes the value of the input and stores it in a variable called searchQuery
 buttonSearch();
@@ -43,16 +48,19 @@ button.style.backgroundColor = "#455d7a"
 button.style.color ="#e3e3e3"
 button.style.fontFamily = "'Montserrat', sans-serif"
 button.className = "buttonClass"
-
+button.style.float = "left"
 
 // console.log(searchQuery)
 //the searchQuery needs to be within the eventlistener in order for the event to fire and retrieve data that corresponds with the user's input
 button.addEventListener("click", function() {
 let searchQuery = document.getElementById("searchInput").value
-    $.get("https://api.jikan.moe/v4/anime?q=" + searchQuery, myResults)
-    $("input").hide()
+if(searchQuery === "") {
+    alert("Please enter an anime!")
+} else { $.get("https://api.jikan.moe/v4/anime?q=" + searchQuery, myResults)
+    $("input").hide()}
+   
 })
-searchBar.appendChild(button)}
+buttonContainer.appendChild(button)}
 
 
 
@@ -60,6 +68,9 @@ function myResults(showData) {
 // console.log(jikanData);
 let animeData = showData.data
 console.log(animeData)
+$(charButton).show();
+$(mangaButton).show();
+$(magazineButton).show();
 
 animeData.forEach((anime) => {
     
@@ -69,6 +80,7 @@ resultContainer.style.width = "40vw"
 resultContainer.style.display = 'flex'
 resultContainer.style.flexWrap = 'wrap'
 resultContainer.style.margin = "auto"
+resultContainer.className = "zoom"
 // resultContainer.style.backgroundColor = "black";
 // resultContainer.style.overflow = "scroll";
 body.appendChild(resultContainer);
@@ -165,14 +177,21 @@ charButton.className = "buttonClass"
 charButton.style.backgroundColor = "#455d7a"
 charButton.style.color ="#e3e3e3"
 charButton.style.fontFamily = "'Montserrat', sans-serif"
-searchBar.appendChild(charButton);
+charButton.style.float = "left"
+charButton.style.marginRight = "10px"
+buttonContainer.appendChild(charButton);
+// $(charButton).hide();
 charButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
-    $.get("https://api.jikan.moe/v4/characters?q=" + searchQuery, getChar)
-    $("input").hide()
+    if(searchQuery === "" ) {
+        alert("Enter a character")
+    } else {$.get("https://api.jikan.moe/v4/characters?q=" + searchQuery, getChar)
+    $("input").hide()}
+    
 })
 
 function getChar(charData) {
+
 console.log(charData)
 let animeChar = charData.data;
 animeChar.forEach((character) => { 
@@ -182,6 +201,7 @@ animeChar.forEach((character) => {
     charContainer.style.display = 'flex'
     charContainer.style.flexWrap = 'wrap'
     charContainer.style.margin = "auto"
+    charContainer.className = "zoom"
    
     
 body.appendChild(charContainer);
@@ -237,12 +257,17 @@ mangaButton.className = "buttonClass"
 mangaButton.style.backgroundColor = "#455d7a"
 mangaButton.style.color ="#e3e3e3"
 mangaButton.style.fontFamily = "'Montserrat', sans-serif"
-searchBar.appendChild(mangaButton);
+mangaButton.style.float = "left"
+mangaButton.style.marginRight = "10px"
+buttonContainer.appendChild(mangaButton);
+// $(mangaButton).hide();
 
 mangaButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
-    $.get("https://api.jikan.moe/v4/manga?q=" + searchQuery, getManga)
-    $("input").hide()
+    if(searchQuery === "") {
+        alert("Enter manga name");
+    } else {$.get("https://api.jikan.moe/v4/manga?q=" + searchQuery, getManga)
+    $("input").hide()} 
 })
 
 
@@ -256,6 +281,7 @@ mangaData2.forEach((manga) => {
     mangaContainer.style.display = 'flex'
     mangaContainer.style.flexWrap = 'wrap'
     mangaContainer.style.margin = "auto"
+    mangaContainer.className = "zoom"
 body.appendChild(mangaContainer);
 
 let span = document.createElement("span");
@@ -330,12 +356,18 @@ magazineButton.className = "buttonClass"
 magazineButton.style.backgroundColor = "#455d7a"
 magazineButton.style.color ="#e3e3e3"
 magazineButton.style.fontFamily = "'Montserrat', sans-serif"
-searchBar.appendChild(magazineButton);
+magazineButton.style.float = "left"
+magazineButton.style.marginRight = "10px"
+buttonContainer.appendChild(magazineButton);
+// $(magazineButton).hide();
 
 magazineButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
-    $.get("https://api.jikan.moe/v4/magazines?q=" + searchQuery, getMag);
-    $("input").hide()
+    if(searchQuery === "") {
+        alert("Enter magazine name");
+    } else { $.get("https://api.jikan.moe/v4/magazines?q=" + searchQuery, getMag);
+    $("input").hide()}
+   
 })
 
 function getMag(magData) {
@@ -349,6 +381,7 @@ function getMag(magData) {
         magazineContainer.style.display = 'flex'
         magazineContainer.style.flexWrap = 'wrap'
         magazineContainer.style.margin = "auto"
+        magazineContainer.className = "zoom"
     body.appendChild(magazineContainer);
     
     let span = document.createElement("span");
