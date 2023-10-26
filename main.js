@@ -9,11 +9,11 @@ let searchBar = document.createElement("div");
 searchBar.style.height = "20vh"
 searchBar.style.width = "99vw"
 searchBar.style.backgroundColor = "#f95959"
-searchBar.textContent = "Anime Front End Project"
+searchBar.textContent = "Front End Project"
 searchBar.style.fontFamily = ""
 searchBar.style.color = "#e3e3e3"
 searchBar.style.textAlign = "center";
-searchBar.style.fontSize = "140px"
+searchBar.style.fontSize = "130px"
 body.appendChild(searchBar);
 
 
@@ -30,7 +30,7 @@ input.style.transform = "translate(-50%, -50%)";
 input.style.backgroundColor = "#455d7a"
 input.id = "searchInput";
 input.type = "text"
-input.placeholder = "Enter anime name..."
+input.placeholder = "type here..."
 body.appendChild(input);
 
 let buttonContainer = document.createElement("div");
@@ -49,6 +49,15 @@ button.style.color ="#e3e3e3"
 button.style.fontFamily = "'Montserrat', sans-serif"
 button.className = "buttonClass"
 button.style.float = "left"
+
+let homeButton = document.createElement("button");
+homeButton.textContent = "Home"
+homeButton.style.backgroundColor = "#455d7a"
+homeButton.style.color ="#e3e3e3"
+homeButton.style.fontFamily = "'Montserrat', sans-serif"
+homeButton.className = "buttonClass"
+homeButton.style.float = "left"
+buttonContainer.appendChild(homeButton)
 
 // console.log(searchQuery)
 //the searchQuery needs to be within the eventlistener in order for the event to fire and retrieve data that corresponds with the user's input
@@ -74,19 +83,21 @@ $(magazineButton).show();
 
 animeData.forEach((anime) => {
     
-    let resultContainer = document.createElement('div');
+let resultContainer = document.createElement('div');
 resultContainer.style.height = "40vh"
 resultContainer.style.width = "40vw"
 resultContainer.style.display = 'flex'
 resultContainer.style.flexWrap = 'wrap'
 resultContainer.style.margin = "auto"
+// resultContainer.className = "card"
 resultContainer.className = "zoom"
+
 // resultContainer.style.backgroundColor = "black";
 // resultContainer.style.overflow = "scroll";
 body.appendChild(resultContainer);
 
     // console.log(anime.title)
-    let span = document.createElement("div");
+    let span = document.createElement("span");
     span.className = "card";
     span.style.height = "40vh"
     span.style.width = "40vw";
@@ -95,6 +106,7 @@ body.appendChild(resultContainer);
     span.style.display = "inline-block"; 
     span.style.position = "relative"; 
     span.style.border = "2px solid #000"
+    span.style.zIndex = "0"
 resultContainer.appendChild(span);
 
 
@@ -109,15 +121,15 @@ span.addEventListener("mouseenter", function() {
      $(a).show()
     $(img).hide();
     $(h2).hide();
-
+$(span).css("z-index", "-1")
 
 })
 span.addEventListener("mouseleave", function() {
     $(p).hide();
     $(h4).hide();
-
     $(img).show();
     $(h2).show();
+
 })
 
 
@@ -137,6 +149,7 @@ let p = document.createElement("p");
 p.textContent = anime.synopsis;
 // console.log(anime.synopsis)
 p.style.color = "#e3e3e3"
+p.className = "limit-p"
 div.appendChild(p);
 $("p").hide()
 
@@ -232,12 +245,14 @@ span.appendChild(img)
 let p = document.createElement("p");
 p.textContent = character.about;
 p.style.color = "#e3e3e3"
+p.className = "limit-p"
 span.appendChild(p)
 
 span.addEventListener("mouseenter", function() {
     $(h2).hide();
     $(img).hide();
     $(p).show();
+    $(span).css("z-index", "-1")
 })
 
 span.addEventListener("mouseleave", function() {
@@ -320,6 +335,8 @@ span.appendChild(h2);
 
  let backGround = document.createElement("p");
  backGround.textContent = manga.background;
+ backGround.style.color = "#e3e3e3"
+ backGround.className = "limit-p"
  span.appendChild(backGround);
  $(backGround).hide();
 
@@ -338,6 +355,7 @@ span.addEventListener("mouseenter", function () {
     $(chapters).hide();
     $(img).hide()
     $(backGround).show();
+    $(span).css("z-index", "-1")
 })
 span.addEventListener("mouseleave", function() {
     $(h2).show();
