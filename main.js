@@ -68,6 +68,7 @@ resultContainer.style.height = "40vh"
 resultContainer.style.width = "40vw"
 resultContainer.style.display = 'flex'
 resultContainer.style.flexWrap = 'wrap'
+resultContainer.style.margin = "auto"
 // resultContainer.style.backgroundColor = "black";
 // resultContainer.style.overflow = "scroll";
 body.appendChild(resultContainer);
@@ -145,10 +146,14 @@ function getGenre() {anime.genres.forEach((genre) => {
     let h3 = document.createElement("h3");
     h3.textContent = genre.name;
     h3.style.color = "#e3e3e3"
+    h3.style.margin = "0 7px"
+    h3.style.display = "inline-block"
     div.appendChild(h3)
 
 });
 }
+
+
 getGenre();
 })
 
@@ -176,6 +181,7 @@ animeChar.forEach((character) => {
     charContainer.style.width = "40vw"
     charContainer.style.display = 'flex'
     charContainer.style.flexWrap = 'wrap'
+    charContainer.style.margin = "auto"
    
     
 body.appendChild(charContainer);
@@ -238,6 +244,8 @@ mangaButton.addEventListener("click", function() {
     $.get("https://api.jikan.moe/v4/manga?q=" + searchQuery, getManga)
     $("input").hide()
 })
+
+
 function getManga(mangaData) {
 console.log(mangaData)
 let mangaData2 = mangaData.data;
@@ -247,6 +255,7 @@ mangaData2.forEach((manga) => {
     mangaContainer.style.width = "40vw"
     mangaContainer.style.display = 'flex'
     mangaContainer.style.flexWrap = 'wrap'
+    mangaContainer.style.margin = "auto"
 body.appendChild(mangaContainer);
 
 let span = document.createElement("span");
@@ -265,12 +274,53 @@ let h2 = document.createElement("h2");
  h2.style.color = "#e3e3e3"
 span.appendChild(h2);
 
+  let rank = document.createElement("h3");
+ rank.textContent = `Rank: ${manga.rank}`
+ rank.style.margin = 'auto'
+ rank.style.color = "#e3e3e3"
+ span.appendChild(rank)
+
+ let score = document.createElement("h3");
+ score.textContent = `Score: ${manga.score}`
+ score.style.margin = 'auto'
+ score.style.color = "#e3e3e3"
+ span.appendChild(score);
+
+  let chapters = document.createElement("h3");
+ chapters.textContent = `Chapter: ${manga.chapters}`
+ chapters.style.margin = 'auto'
+ chapters.style.color = "#e3e3e3"
+ span.appendChild(chapters)
+
+ let backGround = document.createElement("p");
+ backGround.textContent = manga.background;
+ span.appendChild(backGround);
+ $(backGround).hide();
+
+
 let img = document.createElement("img");
 img.src = manga.images.jpg.image_url;
 // console.log(character.images.jpg)
-span.appendChild(img)
 img.style.display = "block";
 img.style.margin = 'auto'
+span.appendChild(img)
+
+span.addEventListener("mouseenter", function () {
+    $(h2).hide();
+    $(rank).hide();
+    $(score).hide();
+    $(chapters).hide();
+    $(img).hide()
+    $(backGround).show();
+})
+span.addEventListener("mouseleave", function() {
+    $(h2).show();
+    $(rank).show();
+    $(score).show();
+    $(chapters).show();
+    $(img).show()
+    $(backGround).hide();
+})
 })
 }
 
@@ -298,6 +348,7 @@ function getMag(magData) {
         magazineContainer.style.width = "40vw"
         magazineContainer.style.display = 'flex'
         magazineContainer.style.flexWrap = 'wrap'
+        magazineContainer.style.margin = "auto"
     body.appendChild(magazineContainer);
     
     let span = document.createElement("span");
