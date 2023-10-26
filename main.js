@@ -33,6 +33,8 @@ buttonSearch();
 function buttonSearch() {
 let button = document.createElement("button");
 button.textContent = "Shows";
+button.className = "buttonClass"
+
 
 // console.log(searchQuery)
 //the searchQuery needs to be within the eventlistener in order for the event to fire and retrieve data that corresponds with the user's input
@@ -115,6 +117,7 @@ $("p").hide()
 let a = document.createElement('a');
 a.textContent = "more info."
 a.href = anime.url
+a.target = "_blank"
 div.appendChild(a)
 
 
@@ -134,6 +137,7 @@ span.appendChild(img)
 
 let charButton = document.createElement("button");
 charButton.textContent = "Characters";
+charButton.className = "buttonClass"
 searchBar.appendChild(charButton);
 charButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
@@ -150,6 +154,8 @@ animeChar.forEach((character) => {
     charContainer.style.width = "40vw"
     charContainer.style.display = 'flex'
     charContainer.style.flexWrap = 'wrap'
+    charContainer.style.overflow = "scroll";
+    
 body.appendChild(charContainer);
 
 let span = document.createElement("span");
@@ -170,13 +176,34 @@ span.appendChild(h2);
 let img = document.createElement("img");
 img.src = character.images.jpg.image_url;
 // console.log(character.images.jpg)
+img.style.display = "block";
+img.style.margin = 'auto'
 span.appendChild(img)
+
+let p = document.createElement("p");
+p.textContent = character.about;
+span.appendChild(p)
+
+span.addEventListener("mouseenter", function() {
+    $(h2).hide();
+    $(img).hide();
+    $(p).show();
+})
+
+span.addEventListener("mouseleave", function() {
+    $(h2).show();
+    $(img).show();
+    $(p).hide();
+})
+
+
 }) 
 }
 
 
 let mangaButton = document.createElement("button");
 mangaButton.textContent = "Manga";
+mangaButton.className = "buttonClass"
 searchBar.appendChild(mangaButton);
 
 mangaButton.addEventListener("click", function() {
@@ -214,11 +241,14 @@ let img = document.createElement("img");
 img.src = manga.images.jpg.image_url;
 // console.log(character.images.jpg)
 span.appendChild(img)
+img.style.display = "block";
+img.style.margin = 'auto'
 })
 }
 
 let magazineButton = document.createElement("button");
 magazineButton.textContent = "Magazine";
+magazineButton.className = "buttonClass"
 searchBar.appendChild(magazineButton);
 
 magazineButton.addEventListener("click", function() {
@@ -257,6 +287,7 @@ function getMag(magData) {
 
       let a = document.createElement("a");
     a.setAttribute("href", magazine.url);
+    a.target = "_blank"
     a.textContent = magazine.name;
     h2.appendChild(a);
 
