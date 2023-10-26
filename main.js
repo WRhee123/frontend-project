@@ -1,12 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
 let body = document.getElementsByTagName('body')[0]
-body.style.backgroundColor = "salmon"
+// body.style.backgroundColor = "#233142"
+body.style.backgroundImage = 'url("sky.png")';
+body.style.backgroundSize = "initial"
+
 
 let searchBar = document.createElement("div");
 searchBar.style.height = "20vh"
 searchBar.style.width = "99vw"
-searchBar.style.backgroundColor = "tomato"
-searchBar.textContent = "Animate"
+searchBar.style.backgroundColor = "#f95959"
+searchBar.textContent = "Anime"
+searchBar.style.fontFamily = ""
+searchBar.style.color = "#e3e3e3"
 searchBar.style.textAlign = "center";
 searchBar.style.fontSize = "140px"
 body.appendChild(searchBar);
@@ -21,6 +26,7 @@ input.style.position = "absolute"
 input.style.left = "50%";
 input.style.top = "50%";
 input.style.transform = "translate(-50%, -50%)";
+input.style.backgroundColor = "#455d7a"
 input.id = "searchInput";
 input.type = "text"
 input.placeholder = "Enter anime name..."
@@ -33,6 +39,9 @@ buttonSearch();
 function buttonSearch() {
 let button = document.createElement("button");
 button.textContent = "Shows";
+button.style.backgroundColor = "#455d7a"
+button.style.color ="#e3e3e3"
+button.style.fontFamily = "'Montserrat', sans-serif"
 button.className = "buttonClass"
 
 
@@ -69,7 +78,7 @@ body.appendChild(resultContainer);
     span.style.height = "40vh"
     span.style.width = "40vw";
     span.style.margin = "auto"
-    span.style.backgroundColor = "white"
+    span.style.backgroundColor = "#455d7a"
     span.style.display = "inline-block"; 
     span.style.position = "relative"; 
     span.style.border = "2px solid #000"
@@ -78,6 +87,7 @@ resultContainer.appendChild(span);
 
 let h2 = document.createElement("h2");
  h2.textContent = anime.title;
+ h2.style.color = "#e3e3e3"
 span.appendChild(h2);
 
 span.addEventListener("mouseenter", function() {
@@ -86,6 +96,7 @@ span.addEventListener("mouseenter", function() {
      $(a).show()
     $(img).hide();
     $(h2).hide();
+
 
 })
 span.addEventListener("mouseleave", function() {
@@ -104,6 +115,7 @@ span.appendChild(div);
 
 let h4 = document.createElement("h4");
 h4.textContent = "Synopsis";
+h4.style.color = "#e3e3e3"
 div.appendChild(h4)
 $(h4).hide();
 
@@ -111,6 +123,7 @@ $(h4).hide();
 let p = document.createElement("p");
 p.textContent = anime.synopsis;
 // console.log(anime.synopsis)
+p.style.color = "#e3e3e3"
 div.appendChild(p);
 $("p").hide()
 
@@ -128,9 +141,15 @@ img.style.margin = 'auto'
 // console.log(anime.images.jpg)
 span.appendChild(img)
 
+function getGenre() {anime.genres.forEach((genre) => {
+    let h3 = document.createElement("h3");
+    h3.textContent = genre.name;
+    h3.style.color = "#e3e3e3"
+    div.appendChild(h3)
 
-
-
+});
+}
+getGenre();
 })
 
 }
@@ -138,6 +157,9 @@ span.appendChild(img)
 let charButton = document.createElement("button");
 charButton.textContent = "Characters";
 charButton.className = "buttonClass"
+charButton.style.backgroundColor = "#455d7a"
+charButton.style.color ="#e3e3e3"
+charButton.style.fontFamily = "'Montserrat', sans-serif"
 searchBar.appendChild(charButton);
 charButton.addEventListener("click", function() {
     let searchQuery = document.getElementById("searchInput").value
@@ -154,7 +176,7 @@ animeChar.forEach((character) => {
     charContainer.style.width = "40vw"
     charContainer.style.display = 'flex'
     charContainer.style.flexWrap = 'wrap'
-    charContainer.style.overflow = "scroll";
+   
     
 body.appendChild(charContainer);
 
@@ -163,7 +185,7 @@ span.className = "card";
 span.style.height = "40vh"
 span.style.width = "40vw";
 span.style.margin = "auto"
-span.style.backgroundColor = "white"
+span.style.backgroundColor = "#455d7a"
 span.style.display = "inline-block"; 
 span.style.position = "relative"; 
 span.style.border = "2px solid #000"
@@ -171,6 +193,7 @@ charContainer.appendChild(span);
 
 let h2 = document.createElement("h2");
  h2.textContent = character.name;
+ h2.style.color = "#e3e3e3"
 span.appendChild(h2);
 
 let img = document.createElement("img");
@@ -182,6 +205,7 @@ span.appendChild(img)
 
 let p = document.createElement("p");
 p.textContent = character.about;
+p.style.color = "#e3e3e3"
 span.appendChild(p)
 
 span.addEventListener("mouseenter", function() {
@@ -204,6 +228,9 @@ span.addEventListener("mouseleave", function() {
 let mangaButton = document.createElement("button");
 mangaButton.textContent = "Manga";
 mangaButton.className = "buttonClass"
+mangaButton.style.backgroundColor = "#455d7a"
+mangaButton.style.color ="#e3e3e3"
+mangaButton.style.fontFamily = "'Montserrat', sans-serif"
 searchBar.appendChild(mangaButton);
 
 mangaButton.addEventListener("click", function() {
@@ -227,7 +254,7 @@ span.className = "card";
 span.style.height = "40vh"
 span.style.width = "40vw";
 span.style.margin = "auto"
-span.style.backgroundColor = "white"
+span.style.backgroundColor = "#455d7a"
 span.style.display = "inline-block"; 
 span.style.position = "relative"; 
 span.style.border = "2px solid #000"
@@ -235,6 +262,7 @@ mangaContainer.appendChild(span);
 
 let h2 = document.createElement("h2");
  h2.textContent = manga.title;
+ h2.style.color = "#e3e3e3"
 span.appendChild(h2);
 
 let img = document.createElement("img");
@@ -249,6 +277,9 @@ img.style.margin = 'auto'
 let magazineButton = document.createElement("button");
 magazineButton.textContent = "Magazine";
 magazineButton.className = "buttonClass"
+magazineButton.style.backgroundColor = "#455d7a"
+magazineButton.style.color ="#e3e3e3"
+magazineButton.style.fontFamily = "'Montserrat', sans-serif"
 searchBar.appendChild(magazineButton);
 
 magazineButton.addEventListener("click", function() {
@@ -274,7 +305,7 @@ function getMag(magData) {
     span.style.height = "40vh"
     span.style.width = "40vw";
     span.style.margin = "auto"
-    span.style.backgroundColor = "white"
+    span.style.backgroundColor = "#455d7a"
     span.style.display = "inline-block"; 
     span.style.position = "relative"; 
     span.style.border = "2px solid #000"
@@ -283,6 +314,7 @@ function getMag(magData) {
 
     
     let h2 = document.createElement("h2");
+    h2.style.textAlign = "center";
     span.appendChild(h2);
 
       let a = document.createElement("a");
