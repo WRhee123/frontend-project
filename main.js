@@ -39,21 +39,6 @@ buttonContainer.style.width = "20px";
 buttonContainer.style.margin = "auto";
 searchBar.appendChild(buttonContainer);
 
-//function that creates a button and adds an eventlistener so when the button is pressed it will send a request to the API with the provided anime name(input)
-//also takes the value of the input and stores it in a variable called searchQuery
-buttonSearch();
-
-function buttonSearch() {
-let button = document.createElement("button");
-button.textContent = "Shows";
-button.style.height = "38px"
-button.style.width = "100px"
-button.style.backgroundColor = "#455d7a";
-button.style.color ="#e3e3e3";
-button.style.fontFamily = "'Montserrat', sans-serif";
-button.className = "buttonClass";
-button.style.float = "left";
-
 let homeButton = document.createElement("button");
 homeButton.textContent = "Home";
 homeButton.style.backgroundColor = "#455d7a";
@@ -64,7 +49,30 @@ homeButton.style.fontFamily = "'Montserrat', sans-serif";
 homeButton.className = "buttonClass";
 homeButton.style.float = "left";
 buttonContainer.appendChild(homeButton)
+homeButton.addEventListener("click", goHome) 
+function goHome() {
+    let containers = document.querySelectorAll(".zoom");
+    containers.forEach((container) => {
+        container.style.display = "none"
+    })
+    input.style.display = 'block'
+}
 
+
+//function that creates a button and adds an eventlistener so when the button is pressed it will send a request to the API with the provided anime name(input)
+//also takes the value of the input and stores it in a variable called searchQuery
+showSearch();
+
+function showSearch() {
+let button = document.createElement("button");
+button.textContent = "Shows";
+button.style.height = "38px"
+button.style.width = "100px"
+button.style.backgroundColor = "#455d7a";
+button.style.color ="#e3e3e3";
+button.style.fontFamily = "'Montserrat', sans-serif";
+button.className = "buttonClass";
+button.style.float = "left";
 // console.log(searchQuery)
 //the searchQuery needs to be within the eventlistener in order for the event to fire and retrieve data that corresponds with the user's input
 button.addEventListener("click", function() {
@@ -76,6 +84,7 @@ if(searchQuery === "") {
 }
 })
 buttonContainer.appendChild(button)}
+
 
 
 
@@ -211,7 +220,6 @@ span.addEventListener("mouseleave", function() {
     $(h2).show();
     $(a).hide();
     $(span).css("z-index", "0");
-
 })
 })
 
