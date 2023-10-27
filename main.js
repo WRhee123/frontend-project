@@ -286,10 +286,17 @@ p.style.color = "#e3e3e3";
 p.className = "limit-p";
 span.appendChild(p);
 
-// let aContainer = document.createElement("div");
-// aContainer.style.width = "10px";
-// aContainer.style.height = "10px";
-// aContainer.textContent = 
+
+let aContainer = document.createElement("div");
+aContainer.style.width = "10px";
+aContainer.style.height = "10px";
+aContainer.style.backgroundColor = "black"
+charContainer.appendChild(aContainer);
+
+let a = document.createElement("a");
+a.setAttribute("href", character.url);
+a.textContent = "Read More Here"
+span.appendChild(a)
 
 span.addEventListener("mouseenter", function() {
     $(h2).hide();
